@@ -30,7 +30,7 @@ A lightweight Rust utility for retrieving the **hostname** and **MAC address** o
 ### 🔧 Clone the Repository
 
 ```bash
-git clone https://github.com/iei-infrastructure/getmacaddress/getmacaddress.git
+git clone https://github.com/iei-infrastructure/getmacaddress.git
 cd getmacaddress
 ```
 
@@ -118,3 +118,4 @@ This project is licensed under the MIT License.
 
 
 © 2025 PT. Indonesia Epson Industry
+

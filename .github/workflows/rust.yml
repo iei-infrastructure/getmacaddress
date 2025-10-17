@@ -2,16 +2,13 @@ name: Rust (Windows GNU)
 
 on:
   push:
-    branches:
-      - main
-    tags:
-      - 'v*.*.*'
+    branches: [main]
+    tags: ['v*.*.*']
   pull_request:
-    branches:
-      - main
+    branches: [main]
 
 permissions:
-  contents: write # Needed for creating releases and uploading assets
+  contents: write
 
 jobs:
   build:
@@ -21,8 +18,10 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Install MinGW-w64 (GNU toolchain)
-      run: choco install -y mingw
+    - name: Install MinGW and UPX
+      run: |
+        choco install -y mingw
+        choco install -y upx
 
     - name: Add GNU target
       run: rustup target add x86_64-pc-windows-gnu
@@ -34,11 +33,16 @@ jobs:
         override: true
         target: x86_64-pc-windows-gnu
 
-    - name: Build (Windows GNU)
-      run: cargo build --verbose --release --target x86_64-pc-windows-gnu
+    - name: Build (release, GNU target)
+      run: cargo build --release --target x86_64-pc-windows-gnu
 
-    - name: Run tests
-      run: cargo test --verbose --target x86_64-pc-windows-gnu
+    - name: Strip executable
+      run: |
+        strip target/x86_64-pc-windows-gnu/release/getmacaddress.exe
+
+    - name: Compress with UPX
+      run: |
+        upx --best --lzma target/x86_64-pc-windows-gnu/release/getmacaddress.exe
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4

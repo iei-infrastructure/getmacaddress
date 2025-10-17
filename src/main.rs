@@ -81,10 +81,11 @@ fn main() {
  | || |___ | |    | | (_) | (_) | \__ \  
 |___|_____|___|   |_|\___/ \___/|_|___/  
 
-getmacaddress v0.1.0
+getmacaddress v0.1.1
 Copyright (C) 2025 PT. Indonesia Epson Industry
 
-A lightweight utility for retrieving hostname and MAC address information.
+A lightweight utility for retrieving the hostname and MAC address
+of Wi-Fi (IEEE 802.11) network interfaces on Windows.
 "#
     );
 

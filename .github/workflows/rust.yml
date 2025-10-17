@@ -1,0 +1,58 @@
+name: Rust (Windows GNU)
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*.*.*'
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: write # Needed for creating releases and uploading assets
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Install MinGW-w64 (GNU toolchain)
+      run: choco install -y mingw
+
+    - name: Add GNU target
+      run: rustup target add x86_64-pc-windows-gnu
+
+    - name: Set up Rust
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+        override: true
+        target: x86_64-pc-windows-gnu
+
+    - name: Build (Windows GNU)
+      run: cargo build --verbose --release --target x86_64-pc-windows-gnu
+
+    - name: Run tests
+      run: cargo test --verbose --target x86_64-pc-windows-gnu
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: getmacaddress
+        path: target/x86_64-pc-windows-gnu/release/getmacaddress.exe
+
+    - name: Create Release
+      if: startsWith(github.ref, 'refs/tags/')
+      uses: ncipollo/release-action@v1.16.0
+      with:
+        artifacts: target/x86_64-pc-windows-gnu/release/getmacaddress.exe
+        token: ${{ secrets.GITHUB_TOKEN }}
+        tag: ${{ github.ref_name }}
+        name: Release ${{ github.ref_name }}
+        body: |
+          Automated release for version ${{ github.ref_name }}

@@ -1,6 +1,6 @@
 # getmacaddress
 
-![build](https://github.com/organizations/iei-infrastructure/getmacaddress/actions/workflows/rust.yml/badge.svg)
+![build](https://github.com/iei-infrastructure/getmacaddress/actions/workflows/rust.yml/badge.svg)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 A lightweight Rust utility for retrieving the **hostname** and **MAC address** of Wi-Fi (IEEE 802.11) network interfaces on Windows.
@@ -30,7 +30,7 @@ A lightweight Rust utility for retrieving the **hostname** and **MAC address** o
 ### 🔧 Clone the Repository
 
 ```bash
-git clone https://github.com/organizations/iei-infrastructure/getmacaddress/getmacaddress.git
+git clone https://github.com/iei-infrastructure/getmacaddress/getmacaddress.git
 cd getmacaddress
 ```
 
@@ -115,5 +115,6 @@ To create a GitHub release with an .exe binary attached:
 ## 📝 License
 
 This project is licensed under the MIT License.
+
 
 © 2025 PT. Indonesia Epson Industry

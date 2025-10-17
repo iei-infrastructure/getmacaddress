@@ -1,0 +1,17 @@
+[package]
+name = "getmacaddress"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+arboard = "3.6.1"
+colored = "3.0.0"
+hostname = "0.4.1"
+widestring = "1.2.1"
+windows = { version = "0.56", features = [
+    "Win32_Foundation",
+    "Win32_NetworkManagement_IpHelper",
+    "Win32_NetworkManagement_Ndis",         # Required for IF_TYPE_IEEE80211
+    "Win32_Networking_WinSock",             # Required for GetAdaptersAddresses
+    "Win32_System_Console"
+] }
